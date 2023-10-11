@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbOpcao1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#2196f3"
+            android:text="Opção 1"
+            android:textColor="#2196f3" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbOpcao2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#2196f3"
+            android:text="Opção 2"
+            android:textColor="#2196f3" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbOpcao3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#2196f3"
+            android:text="Opção 3"
+            android:textColor="#2196f3" />
+    </RadioGroup>
+
+</LinearLayout>

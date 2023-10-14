@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.devmeist3r.fragments.databinding.FragmentABinding
@@ -44,7 +45,8 @@ class FragmentA : Fragment() {
             "KEY",
             this
         ) { key, bundle ->
-
+            val name = bundle[key].toString()
+            Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.devmeist3r.fragments.databinding.FragmentBBinding
 
@@ -26,7 +28,18 @@ class FragmentB : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListeners()
         getExtra()
+    }
+
+    private fun initListeners() {
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.setFragmentResult(
+                "KEY",
+                bundleOf(Pair("KEY", "João Paulo"))
+            )
+            findNavController().popBackStack()
+        }
     }
 
     private fun getExtra() {

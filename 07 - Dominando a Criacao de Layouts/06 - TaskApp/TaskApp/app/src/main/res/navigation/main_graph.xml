@@ -11,6 +11,8 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_authentication"
             app:destination="@id/authentication" />
     </fragment>

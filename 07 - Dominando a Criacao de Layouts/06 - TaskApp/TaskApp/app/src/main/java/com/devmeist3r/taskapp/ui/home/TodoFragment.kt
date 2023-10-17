@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.devmeist3r.taskapp.R
-import com.devmeist3r.taskapp.databinding.FragmentDoneBinding
 import com.devmeist3r.taskapp.databinding.FragmentTodoBinding
 
 class TodoFragment : Fragment() {

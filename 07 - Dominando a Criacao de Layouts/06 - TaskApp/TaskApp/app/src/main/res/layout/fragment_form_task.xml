@@ -48,13 +48,12 @@
 
             <EditText
                 android:id="@+id/editDescription"
+                style="@style/EditTextTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_edit_text"
                 android:hint="Criar nova tela de login"
                 android:inputType="textEmailAddress"
-                android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
@@ -83,8 +82,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="A Fazer"
                     android:checked="true"
+                    android:text="A Fazer"
                     android:textColor="#FFFFFF"
                     app:buttonTint="#FFFFFF" />
 
@@ -109,14 +108,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
+                style="@style/ButtonTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_btn"
                 android:text="SALVAR"
-                android:textColor="@color/color_default"
                 android:textStyle="bold"
-                app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

@@ -43,7 +43,7 @@ class RecoverAccountFragment : Fragment() {
         if (email.isNotEmpty()) {
           findNavController().navigate(R.id.action_global_homeFragment)
         } else {
-            showBottomSheet(message = R.string.email_empty)
+            showBottomSheet(message =getString(R.string.email_empty))
         }
     }
 

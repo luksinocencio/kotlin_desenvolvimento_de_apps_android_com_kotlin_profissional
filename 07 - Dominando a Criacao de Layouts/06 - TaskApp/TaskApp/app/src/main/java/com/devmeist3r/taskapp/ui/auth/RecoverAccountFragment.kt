@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentRecoverAccountBinding
 import com.devmeist3r.taskapp.util.initToolbar
+import com.devmeist3r.taskapp.util.showBottomSheet
 
 class RecoverAccountFragment : Fragment() {
     private var _binding: FragmentRecoverAccountBinding? = null
@@ -40,9 +41,9 @@ class RecoverAccountFragment : Fragment() {
         val email = binding.editEmail.text.toString().trim()
 
         if (email.isNotEmpty()) {
-//          findNavController().navigate(R.id.action_global_homeFragment)
+          findNavController().navigate(R.id.action_global_homeFragment)
         } else {
-            Toast.makeText(requireContext(), "Preencha um e-mail válido.", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.email_empty)
         }
     }
 

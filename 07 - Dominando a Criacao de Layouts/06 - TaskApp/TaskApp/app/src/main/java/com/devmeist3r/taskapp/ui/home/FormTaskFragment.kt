@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
 import com.devmeist3r.taskapp.util.initToolbar
+import com.devmeist3r.taskapp.util.showBottomSheet
 
 class FormTaskFragment : Fragment() {
     private var _binding: FragmentFormTaskBinding? = null
@@ -41,6 +43,7 @@ class FormTaskFragment : Fragment() {
 
         } else {
             Toast.makeText(requireContext(), "Crie uma tarefa", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.description_empty_form_task_fragment)
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
 import com.devmeist3r.taskapp.util.initToolbar
 
@@ -24,6 +25,23 @@ class FormTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.btnSave.setOnClickListener {
+            validateData()
+        }
+    }
+
+    private fun validateData() {
+        val description = binding.editDescription.text.toString().trim()
+
+        if (description.isNotEmpty()) {
+
+        } else {
+            Toast.makeText(requireContext(), "Crie uma tarefa", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {

@@ -58,6 +58,7 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/editEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -67,6 +68,7 @@
                 android:padding="16dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

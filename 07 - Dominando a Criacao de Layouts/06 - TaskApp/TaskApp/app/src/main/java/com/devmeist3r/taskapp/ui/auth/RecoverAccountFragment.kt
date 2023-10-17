@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentRecoverAccountBinding
 import com.devmeist3r.taskapp.util.initToolbar
 
@@ -24,6 +27,23 @@ class RecoverAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.btnSend.setOnClickListener {
+            validateData()
+        }
+    }
+
+    private fun validateData() {
+        val email = binding.editEmail.text.toString().trim()
+
+        if (email.isNotEmpty()) {
+//          findNavController().navigate(R.id.action_global_homeFragment)
+        } else {
+            Toast.makeText(requireContext(), "Preencha um e-mail válido.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail"
+            android:text="@string/email_text"
             android:textColor="@color/white" />
 
         <EditText
@@ -30,14 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="Digite seu e-mail"
+            android:hint="@string/hint_edit_email"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Senha"
+            android:text="@string/password_text"
             android:textColor="@color/white" />
 
         <EditText
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="Digite sua senha"
+            android:hint="@string/hint_edit_password"
             android:inputType="textPassword" />
 
         <com.google.android.material.button.MaterialButton
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="LOGIN" />
+            android:text="@string/text_title_login_fragment" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Criar conta"
+                android:text="@string/text_button_register_login_fragment"
                 android:textColor="@color/white" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recuperar conta"
+                android:text="@string/text_button_recover_login_fragment"
                 android:textAlignment="textEnd"
                 android:textColor="@color/white" />
         </LinearLayout>

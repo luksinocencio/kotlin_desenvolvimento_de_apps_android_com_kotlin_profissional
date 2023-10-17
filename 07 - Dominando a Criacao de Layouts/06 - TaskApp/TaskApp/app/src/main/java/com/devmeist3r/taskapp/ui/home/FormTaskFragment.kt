@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
+import com.devmeist3r.taskapp.util.initToolbar
 
 class FormTaskFragment : Fragment() {
     private var _binding: FragmentFormTaskBinding? = null
@@ -18,6 +19,11 @@ class FormTaskFragment : Fragment() {
     ): View {
         _binding = FragmentFormTaskBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
     }
 
     override fun onDestroyView() {

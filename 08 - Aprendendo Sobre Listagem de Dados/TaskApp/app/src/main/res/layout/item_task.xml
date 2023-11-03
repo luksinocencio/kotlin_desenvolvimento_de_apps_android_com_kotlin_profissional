@@ -55,15 +55,15 @@
                 android:textAllCaps="true"
                 android:textSize="11sp"
                 app:backgroundTint="@color/color_delete"
-                app:layout_constraintBottom_toBottomOf="@+id/btnDetail"
-                app:layout_constraintEnd_toStartOf="@+id/btnDetail"
+                app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
+                app:layout_constraintEnd_toStartOf="@+id/btnEdit"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btnDetail" />
+                app:layout_constraintTop_toTopOf="@+id/btnEdit" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEdit"
+                android:id="@+id/btnDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/bg_btn"
@@ -72,14 +72,14 @@
                 android:textAllCaps="true"
                 android:textSize="11sp"
                 app:backgroundTint="@color/color_details"
-                app:layout_constraintBottom_toBottomOf="@+id/btnDetail"
+                app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnDetail"
-                app:layout_constraintTop_toTopOf="@+id/btnDetail" />
+                app:layout_constraintStart_toEndOf="@+id/btnEdit"
+                app:layout_constraintTop_toTopOf="@+id/btnEdit" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDetail"
+                android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginHorizontal="8dp"
@@ -93,7 +93,7 @@
                 android:textSize="11sp"
                 app:backgroundTint="@color/color_default"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+                app:layout_constraintEnd_toStartOf="@+id/btnDetail"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnDelete"
                 app:layout_constraintTop_toBottomOf="@+id/textDescription" />
@@ -104,16 +104,13 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_next"
-                app:layout_constraintBottom_toBottomOf="@+id/btnDetail"
+                app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/btnEdit"
-                app:layout_constraintTop_toTopOf="@+id/btnDetail"
+                app:layout_constraintStart_toEndOf="@+id/btnDetail"
+                app:layout_constraintTop_toTopOf="@+id/btnEdit"
                 app:tint="@color/color_default" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </com.google.android.material.card.MaterialCardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,8 +14,17 @@ import com.devmeist3r.taskapp.ui.data.model.Task
 
 class TaskAdapter(
     private val context: Context,
-    private val taskList: List<Task>
+    private val taskList: List<Task>,
+    private val taskSelected: (Task, Int) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
+    companion object {
+        val SELECT_BACK: Int = 1
+        val SELECT_REMOVE: Int = 2
+        val SELECT_EDIT: Int = 3
+        val SELECT_DETAILS: Int = 4
+        val SELECT_NEXT: Int = 5
+    }
+
     // criar nossa visualização para cada linha
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -35,12 +44,17 @@ class TaskAdapter(
         val task = taskList[position]
         holder.binding.textDescription.text = task.description
         setIndicators(task, holder)
+
+        holder.binding.btnDelete.setOnClickListener { taskSelected(task, SELECT_REMOVE) }
+        holder.binding.btnEdit.setOnClickListener { taskSelected(task, SELECT_EDIT) }
+        holder.binding.btnDetail.setOnClickListener { taskSelected(task, SELECT_DETAILS) }
     }
 
     private fun setIndicators(task: Task, holder: MyViewHolder) {
         when (task.status) {
             Status.TODO -> {
                 holder.binding.btnBack.isVisible = false
+                holder.binding.btnNext.setOnClickListener { taskSelected(task, SELECT_NEXT) }
             }
 
             Status.DOING -> {
@@ -56,14 +70,17 @@ class TaskAdapter(
                         R.color.color_status_done
                     )
                 )
+
+                holder.binding.btnBack.setOnClickListener { taskSelected(task, SELECT_BACK) }
+                holder.binding.btnNext.setOnClickListener { taskSelected(task, SELECT_NEXT) }
             }
 
             Status.DONE -> {
                 holder.binding.btnNext.isVisible = false
+                holder.binding.btnBack.setOnClickListener { taskSelected(task, SELECT_BACK) }
             }
         }
     }
 
-    //
     inner class MyViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 }

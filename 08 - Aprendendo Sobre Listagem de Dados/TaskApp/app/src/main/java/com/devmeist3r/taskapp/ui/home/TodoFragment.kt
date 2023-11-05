@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentTodoBinding
 import com.devmeist3r.taskapp.ui.adapter.TaskAdapter
+import com.devmeist3r.taskapp.ui.adapter.TaskTopAdapter
 import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 import com.devmeist3r.taskapp.util.getTasks
@@ -20,6 +22,7 @@ class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private lateinit var taskAdapter: TaskAdapter
+    private lateinit var taskTopAdapter: TaskTopAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +37,8 @@ class TodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
         initRecyclerView()
-        getTasks(taskAdapter)
+
+        getTasks(taskAdapter, taskTopAdapter)
     }
 
     private fun initListeners() {
@@ -45,14 +49,20 @@ class TodoFragment : Fragment() {
 
     // Equivalente o cellForRow
     private fun initRecyclerView() {
+        taskTopAdapter = TaskTopAdapter() { task, option ->
+            optionSelected(task, option)
+        }
+
         taskAdapter = TaskAdapter(requireContext()) { task, option ->
             optionSelected(task, option)
         }
 
+        val concatAdapter = ConcatAdapter(taskAdapter, taskTopAdapter)
+
         with(binding.rvTasks) {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            adapter = taskAdapter
+            adapter = concatAdapter
         }
     }
 

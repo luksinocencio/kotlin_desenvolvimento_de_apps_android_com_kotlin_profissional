@@ -1,10 +1,15 @@
 package com.devmeist3r.taskapp.util
 
 import com.devmeist3r.taskapp.ui.adapter.TaskAdapter
+import com.devmeist3r.taskapp.ui.adapter.TaskTopAdapter
 import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 
-fun getTasks(taskAdapter: TaskAdapter) {
+fun getTasks(taskAdapter: TaskAdapter, taskTopAdapter: TaskTopAdapter? = null) {
+    val taskTopList = listOf(
+        Task("0", "Top da minha lista", Status.DOING)
+    )
+
     val taskList = listOf(
         Task("0", "Criando Layout Tela de Login", Status.DOING),
         Task("1", "Criando Layout Tela de Splash", Status.DONE),
@@ -19,5 +24,6 @@ fun getTasks(taskAdapter: TaskAdapter) {
         Task("10", "Criando Layout Tela de Recuperar senha", Status.DOING),
     )
 
+    taskTopAdapter?.submitList(taskTopList)
     taskAdapter.submitList(taskList)
 }

@@ -15,6 +15,11 @@
             app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_authentication"
             app:destination="@id/authentication" />
+        <action
+            android:id="@+id/action_splashFragment_to_formTaskFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <navigation
         android:id="@+id/authentication"
@@ -43,7 +48,9 @@
         </fragment>
         <action
             android:id="@+id/action_global_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
     </navigation>
     <fragment
         android:id="@+id/homeFragment"

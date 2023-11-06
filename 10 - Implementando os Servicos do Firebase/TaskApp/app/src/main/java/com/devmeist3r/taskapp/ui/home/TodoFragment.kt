@@ -13,16 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentTodoBinding
 import com.devmeist3r.taskapp.ui.adapter.TaskAdapter
-import com.devmeist3r.taskapp.ui.adapter.TaskTopAdapter
-import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 import com.devmeist3r.taskapp.util.getTasks
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private lateinit var taskAdapter: TaskAdapter
-    private lateinit var taskTopAdapter: TaskTopAdapter
+
+    private lateinit var reference: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +46,10 @@ class TodoFragment : Fragment() {
         initListeners()
         initRecyclerView()
 
-        getTasks(taskAdapter, taskTopAdapter)
+        reference = Firebase.database.reference
+        auth = Firebase.auth
+
+        getTasks()
     }
 
     private fun initListeners() {
@@ -49,20 +60,14 @@ class TodoFragment : Fragment() {
 
     // Equivalente o cellForRow
     private fun initRecyclerView() {
-        taskTopAdapter = TaskTopAdapter() { task, option ->
-            optionSelected(task, option)
-        }
-
         taskAdapter = TaskAdapter(requireContext()) { task, option ->
             optionSelected(task, option)
         }
 
-        val concatAdapter = ConcatAdapter(taskAdapter, taskTopAdapter)
-
         with(binding.rvTasks) {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            adapter = concatAdapter
+            adapter = taskAdapter
         }
     }
 
@@ -84,6 +89,28 @@ class TodoFragment : Fragment() {
                 makeToast(requireContext(), "Voltar: ${task.description}")
             }
         }
+    }
+
+    private fun getTasks() {
+        reference
+            .child("tasks")
+            .child(auth.currentUser?.uid ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val taskList = mutableListOf<Task>()
+
+                    for (ds in snapshot.children) {
+                        val task = ds.getValue(Task::class.java) as Task
+                        taskList.add(task)
+                    }
+
+                    taskAdapter.submitList(taskList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private fun makeToast(context: Context, message: String) {

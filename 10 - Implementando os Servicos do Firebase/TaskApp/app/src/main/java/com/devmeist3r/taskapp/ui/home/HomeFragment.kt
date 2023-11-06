@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentHomeBinding
-import com.devmeist3r.taskapp.databinding.FragmentSplashBinding
 import com.devmeist3r.taskapp.ui.adapter.ViewPagerAdapter
 import com.devmeist3r.taskapp.util.showBottomSheet
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -59,7 +57,7 @@ class HomeFragment : Fragment() {
 
     private fun signOut() {
         showBottomSheet(
-            titleButton = R.string.text_button_dialog_confirm_logout,
+            titleButton = R.string.text_button_dialog_confirm,
             titleDialog = R.string.text_title_dialog_confirm_logout,
             message = getString(R.string.text_message_dialog_confirm_logout),
             onClick = {

@@ -16,6 +16,12 @@
     <string name="password_empty">Informe sua senha.</string>
     <string name="hint_edit_password">Digite sua senha</string>
     <string name="error_generic">Ocorreu um erro, por tente mais tarde</string>
+    <string name="text_list_task_empty">Nenhuma tarefa cadastrada.</string>
+    <string name="text_load_task_empty">Aguarde, estamos carregando as informações</string>
+    <string name="text_delete_success_task">Tarefa removida com sucesso</string>
+    <string name="text_button_dialog_confirm">Confirmar</string>
+    <string name="text_title_dialog_delete">Desejar remover esta tarefa?</string>
+    <string name="text_message_dialog_delete">Aperte em confirmar para remover a tarefa.</string>
 
     <!--    Login Fragment-->
     <string name="text_title_login_fragment">Login</string>
@@ -45,6 +51,5 @@
 
     <!--    Home Fragment-->
     <string name="text_title_dialog_confirm_logout">Deseja sair da sua conta?</string>
-    <string name="text_button_dialog_confirm_logout">Confirmar</string>
     <string name="text_message_dialog_confirm_logout">Aperte em confirmar para sair da sua conta.</string>
 </resources>

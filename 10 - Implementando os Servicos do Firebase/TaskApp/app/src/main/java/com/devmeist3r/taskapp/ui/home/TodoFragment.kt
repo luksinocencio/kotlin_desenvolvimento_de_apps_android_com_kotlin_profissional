@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentTodoBinding
 import com.devmeist3r.taskapp.ui.adapter.TaskAdapter
+import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 import com.devmeist3r.taskapp.util.getTasks
+import com.devmeist3r.taskapp.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -74,7 +77,15 @@ class TodoFragment : Fragment() {
     private fun optionSelected(task: Task, option: Int) {
         when(option) {
             TaskAdapter.SELECT_REMOVE -> {
-                makeToast(requireContext(), "Remover: ${task.description}")
+
+                showBottomSheet(
+                    titleDialog = R.string.text_title_dialog_delete,
+                    message = getString(R.string.text_message_dialog_delete),
+                    titleButton = R.string.text_button_dialog_confirm,
+                    onClick = {
+                        deleteTask(task)
+                    }
+                )
             }
             TaskAdapter.SELECT_EDIT -> {
                 makeToast(requireContext(), "Editar: ${task.description}")
@@ -101,9 +112,13 @@ class TodoFragment : Fragment() {
 
                     for (ds in snapshot.children) {
                         val task = ds.getValue(Task::class.java) as Task
-                        taskList.add(task)
+                        if (task.status == Status.TODO) {
+                            taskList.add(task)
+                        }
                     }
-
+                    binding.progressBar.isVisible = false
+                    listEmpty(taskList)
+                    taskList.reverse()
                     taskAdapter.submitList(taskList)
                 }
 
@@ -111,6 +126,28 @@ class TodoFragment : Fragment() {
                     Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    private fun deleteTask(task: Task) {
+        reference
+            .child("tasks")
+            .child(auth.currentUser?.uid ?: "")
+            .child(task.id)
+            .removeValue().addOnCompleteListener {
+                if(it.isSuccessful) {
+                    makeToast(requireContext(), getString(R.string.text_delete_success_task))
+                } else {
+                    makeToast(requireContext(), getString(R.string.error_generic))
+                }
+            }
+    }
+
+    private fun listEmpty(taskList: List<Task>) {
+        binding.textInfo.text = if(taskList.isEmpty()) {
+            getString(R.string.text_list_task_empty)
+        } else {
+            ""
+        }
     }
 
     private fun makeToast(context: Context, message: String) {

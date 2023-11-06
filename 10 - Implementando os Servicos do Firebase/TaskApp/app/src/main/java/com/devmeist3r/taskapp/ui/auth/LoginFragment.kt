@@ -12,7 +12,6 @@ import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentLoginBinding
 import com.devmeist3r.taskapp.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

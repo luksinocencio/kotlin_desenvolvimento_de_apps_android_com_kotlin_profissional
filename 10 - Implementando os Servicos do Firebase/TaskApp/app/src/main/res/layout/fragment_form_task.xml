@@ -23,6 +23,7 @@
                 app:navigationIcon="@drawable/ic_back">
 
                 <TextView
+                    android:id="@+id/text_toolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -69,7 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editDescription" />
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/rg_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -116,7 +117,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/rg_status" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

@@ -1,22 +1,22 @@
 package com.devmeist3r.taskapp.ui.home
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentTodoBinding
 import com.devmeist3r.taskapp.ui.adapter.TaskAdapter
 import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
-import com.devmeist3r.taskapp.util.getTasks
+import com.devmeist3r.taskapp.ui.viewModel.TaskViewModel
+import com.devmeist3r.taskapp.util.makeToast
 import com.devmeist3r.taskapp.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -34,6 +34,8 @@ class TodoFragment : Fragment() {
 
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
+
+    private val viewModel: TaskViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +59,24 @@ class TodoFragment : Fragment() {
 
     private fun initListeners() {
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToFormTaskFragment(null)
+            findNavController().navigate(action)
+        }
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.taskUpdate.observe(viewLifecycleOwner) { updateTask ->
+            if (updateTask.status == Status.TODO) {
+                val oldList = taskAdapter.currentList
+                val newList = oldList.toMutableList().apply {
+                    find { it.id == updateTask.id }?.description = updateTask.description
+                }
+                val position = newList.indexOfFirst { it.id == updateTask.id }
+                taskAdapter.submitList(newList)
+                taskAdapter.notifyItemChanged(position)
+            }
         }
     }
 
@@ -77,7 +96,6 @@ class TodoFragment : Fragment() {
     private fun optionSelected(task: Task, option: Int) {
         when(option) {
             TaskAdapter.SELECT_REMOVE -> {
-
                 showBottomSheet(
                     titleDialog = R.string.text_title_dialog_delete,
                     message = getString(R.string.text_message_dialog_delete),
@@ -88,16 +106,16 @@ class TodoFragment : Fragment() {
                 )
             }
             TaskAdapter.SELECT_EDIT -> {
-                makeToast(requireContext(), "Editar: ${task.description}")
+                val action = HomeFragmentDirections
+                    .actionHomeFragmentToFormTaskFragment(task)
+                findNavController().navigate(action)
             }
             TaskAdapter.SELECT_DETAILS -> {
                 makeToast(requireContext(), "Detalhes: ${task.description}")
             }
             TaskAdapter.SELECT_NEXT -> {
-                makeToast(requireContext(), "Proximo: ${task.description}")
-            }
-            TaskAdapter.SELECT_BACK -> {
-                makeToast(requireContext(), "Voltar: ${task.description}")
+               task.status = Status.DOING
+                updateTask(task)
             }
         }
     }
@@ -136,8 +154,32 @@ class TodoFragment : Fragment() {
             .removeValue().addOnCompleteListener {
                 if(it.isSuccessful) {
                     makeToast(requireContext(), getString(R.string.text_delete_success_task))
+                    val oldList = taskAdapter.currentList
+                    val newList = oldList.toMutableList().apply {
+                        remove(task)
+                    }
+                    taskAdapter.submitList(newList)
                 } else {
                     makeToast(requireContext(), getString(R.string.error_generic))
+                }
+            }
+    }
+
+    private fun updateTask(task: Task) {
+        reference
+            .child("tasks")
+            .child(auth.currentUser?.uid ?: "")
+            .child(task.id)
+            .setValue(task).addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.text_update_success_form_task_fragment,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }
@@ -148,10 +190,6 @@ class TodoFragment : Fragment() {
         } else {
             ""
         }
-    }
-
-    private fun makeToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

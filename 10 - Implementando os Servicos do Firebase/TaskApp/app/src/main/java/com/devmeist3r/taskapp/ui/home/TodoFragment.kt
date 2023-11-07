@@ -27,7 +27,6 @@ class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private lateinit var taskAdapter: TaskAdapter
-
     private val viewModel: TaskViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -83,7 +82,7 @@ class TodoFragment : Fragment() {
     }
 
     private fun optionSelected(task: Task, option: Int) {
-        when(option) {
+        when (option) {
             TaskAdapter.SELECT_REMOVE -> {
                 showBottomSheet(
                     titleDialog = R.string.text_title_dialog_delete,
@@ -103,7 +102,7 @@ class TodoFragment : Fragment() {
                 makeToast(requireContext(), "Detalhes: ${task.description}")
             }
             TaskAdapter.SELECT_NEXT -> {
-               task.status = Status.DOING
+                task.status = Status.DOING
                 updateTask(task)
             }
         }
@@ -130,7 +129,8 @@ class TodoFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
     }
@@ -141,7 +141,7 @@ class TodoFragment : Fragment() {
             .child(FirebaseHelper.getIdUser())
             .child(task.id)
             .removeValue().addOnCompleteListener {
-                if(it.isSuccessful) {
+                if (it.isSuccessful) {
                     makeToast(requireContext(), getString(R.string.text_delete_success_task))
                     val oldList = taskAdapter.currentList
                     val newList = oldList.toMutableList().apply {
@@ -174,7 +174,7 @@ class TodoFragment : Fragment() {
     }
 
     private fun listEmpty(taskList: List<Task>) {
-        binding.textInfo.text = if(taskList.isEmpty()) {
+        binding.textInfo.text = if (taskList.isEmpty()) {
             getString(R.string.text_list_task_empty)
         } else {
             ""

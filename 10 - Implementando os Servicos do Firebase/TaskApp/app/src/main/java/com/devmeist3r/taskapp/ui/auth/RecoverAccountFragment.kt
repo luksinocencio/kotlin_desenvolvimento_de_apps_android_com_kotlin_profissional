@@ -1,15 +1,14 @@
 package com.devmeist3r.taskapp.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentRecoverAccountBinding
+import com.devmeist3r.taskapp.util.FirebaseHelper
 import com.devmeist3r.taskapp.util.initToolbar
 import com.devmeist3r.taskapp.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
@@ -63,9 +62,9 @@ class RecoverAccountFragment : Fragment() {
                         message = getString(R.string.text_message_recover_account_fragment)
                     )
                 } else {
-
-                    Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT)
-                        .show()
+                    showBottomSheet(
+                        message = getString(FirebaseHelper.validError(task.exception?.message.toString()))
+                    )
                 }
             }
     }

@@ -14,14 +14,10 @@ import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
 import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 import com.devmeist3r.taskapp.ui.viewModel.TaskViewModel
+import com.devmeist3r.taskapp.util.FirebaseHelper
 import com.devmeist3r.taskapp.util.initToolbar
 import com.devmeist3r.taskapp.util.makeToast
 import com.devmeist3r.taskapp.util.showBottomSheet
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class FormTaskFragment : Fragment() {
     private var _binding: FragmentFormTaskBinding? = null
@@ -29,9 +25,6 @@ class FormTaskFragment : Fragment() {
     private lateinit var task: Task
     private var status: Status = Status.TODO
     private var newTask: Boolean = true
-
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
 
     private val args: FormTaskFragmentArgs by navArgs()
     private val viewModel: TaskViewModel by activityViewModels()
@@ -48,10 +41,6 @@ class FormTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
-
-        reference = Firebase.database.reference
-        auth = Firebase.auth
-
         getArgs()
         initListeners()
     }
@@ -60,7 +49,6 @@ class FormTaskFragment : Fragment() {
         args.task.let {
             if (it != null) {
                 this.task = it
-
                 configureTask()
             }
         }
@@ -105,7 +93,6 @@ class FormTaskFragment : Fragment() {
             binding.progressBar.isVisible = true
 
             if (newTask) task = Task()
-            task.id = reference.database.reference.push().key ?: ""
             task.description = description
             task.status = status
 
@@ -116,9 +103,9 @@ class FormTaskFragment : Fragment() {
     }
 
     private fun saveTask() {
-        reference
+        FirebaseHelper.getDatabase()
             .child("tasks")
-            .child(auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getIdUser())
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
                 if (result.isSuccessful) {

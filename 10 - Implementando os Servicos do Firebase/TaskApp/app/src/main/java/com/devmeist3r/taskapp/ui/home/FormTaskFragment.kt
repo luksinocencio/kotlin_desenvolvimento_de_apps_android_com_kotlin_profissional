@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
+import com.devmeist3r.taskapp.ui.BaseFragment
 import com.devmeist3r.taskapp.ui.data.model.Status
 import com.devmeist3r.taskapp.ui.data.model.Task
 import com.devmeist3r.taskapp.ui.viewModel.TaskViewModel
@@ -19,7 +20,7 @@ import com.devmeist3r.taskapp.util.initToolbar
 import com.devmeist3r.taskapp.util.makeToast
 import com.devmeist3r.taskapp.util.showBottomSheet
 
-class FormTaskFragment : Fragment() {
+class FormTaskFragment : BaseFragment() {
     private var _binding: FragmentFormTaskBinding? = null
     private val binding get() = _binding!!
     private lateinit var task: Task
@@ -90,8 +91,8 @@ class FormTaskFragment : Fragment() {
         val description = binding.editDescription.text.toString().trim()
 
         if (description.isNotEmpty()) {
+            hideKeyboard()
             binding.progressBar.isVisible = true
-
             if (newTask) task = Task()
             task.description = description
             task.status = status

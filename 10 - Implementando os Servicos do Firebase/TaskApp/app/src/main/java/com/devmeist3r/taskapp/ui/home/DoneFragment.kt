@@ -2,6 +2,7 @@ package com.devmeist3r.taskapp.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -122,8 +123,7 @@ class DoneFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT)
-                        .show()
+                    Log.i("INFOTESTE", "onCancelled:")
                 }
             })
     }

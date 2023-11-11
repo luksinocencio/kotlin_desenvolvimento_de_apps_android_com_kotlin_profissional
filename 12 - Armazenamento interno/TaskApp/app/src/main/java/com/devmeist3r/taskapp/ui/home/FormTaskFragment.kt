@@ -6,17 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.devmeist3r.taskapp.R
 import com.devmeist3r.taskapp.databinding.FragmentFormTaskBinding
 import com.devmeist3r.taskapp.ui.BaseFragment
-import com.devmeist3r.taskapp.ui.data.model.Status
+import com.devmeist3r.taskapp.ui.StateTask
+
 import com.devmeist3r.taskapp.ui.data.model.Task
-import com.devmeist3r.taskapp.ui.viewModel.TaskViewModel
+import com.devmeist3r.taskapp.ui.TaskViewModel
+import com.devmeist3r.taskapp.ui.data.db.AppDatabase
+import com.devmeist3r.taskapp.ui.data.db.repository.TaskRepository
+import com.devmeist3r.taskapp.ui.model.Status
 import com.devmeist3r.taskapp.util.initToolbar
 import com.devmeist3r.taskapp.util.makeToast
 import com.devmeist3r.taskapp.util.showBottomSheet
+import java.lang.Thread.State
 
 class FormTaskFragment : BaseFragment() {
     private var _binding: FragmentFormTaskBinding? = null
@@ -26,7 +34,20 @@ class FormTaskFragment : BaseFragment() {
     private var newTask: Boolean = true
 
     private val args: FormTaskFragmentArgs by navArgs()
-    private val viewModel: TaskViewModel by activityViewModels()
+
+    private val viewModel: TaskViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(TaskViewModel::class.java)) {
+                    val database = AppDatabase.getDatabase(requireContext())
+                    val repository = TaskRepository(database.taskDao())
+                    @Suppress("UNCHECKED_CAST")
+                    return TaskViewModel(repository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,9 +120,16 @@ class FormTaskFragment : BaseFragment() {
             task.status = status
 
             if (newTask) {
-                viewModel.insertTask(task)
+                viewModel.insertOrUpdateTask(
+                    description = description,
+                    status = status
+                )
             } else {
-                viewModel.updateTask(task)
+                viewModel.insertOrUpdateTask(
+                    id = task.id,
+                    description = description,
+                    status = status
+                )
             }
         } else {
             showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
@@ -109,13 +137,14 @@ class FormTaskFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.taskInsert.observe(viewLifecycleOwner) { task ->
-            makeToast(requireContext(), getString(R.string.text_save_success_form_task_fragment))
+        viewModel.taskStateData.observe(viewLifecycleOwner) { stateTask ->
+            if (stateTask == StateTask.Inserted || stateTask == StateTask.Update)
             findNavController().popBackStack()
         }
 
-        viewModel.taskUpdate.observe(viewLifecycleOwner) { task ->
-            makeToast(requireContext(), getString(R.string.text_update_success_form_task_fragment))
+        viewModel.taskStateMessage.observe(viewLifecycleOwner) { message ->
+            binding.progressBar.isVisible = false
+            makeToast(requireContext(), getString(message))
         }
     }
 

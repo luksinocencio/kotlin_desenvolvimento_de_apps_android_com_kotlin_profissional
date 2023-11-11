@@ -1,4 +1,4 @@
-package com.devmeist3r.taskapp.ui.data.model
+package com.devmeist3r.taskapp.ui.model
 
 enum class Status {
     TODO,

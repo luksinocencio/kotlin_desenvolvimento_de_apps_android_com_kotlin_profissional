@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.devmeist3r.taskapp.R
-import com.devmeist3r.taskapp.ui.data.db.entity.toTaskEntity
-import com.devmeist3r.taskapp.ui.data.db.repository.TaskRepository
-import com.devmeist3r.taskapp.ui.data.model.Task
+import com.devmeist3r.taskapp.data.db.entity.toTaskEntity
+import com.devmeist3r.taskapp.data.db.repository.TaskRepository
+import com.devmeist3r.taskapp.data.model.Task
 import com.devmeist3r.taskapp.ui.model.Status
 import com.devmeist3r.taskapp.util.StateView
 import kotlinx.coroutines.launch
@@ -28,14 +28,17 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
         }
     }
 
-    fun getTasks() {
-
+    fun deleteTask(id: Long) = viewModelScope.launch {
+        try {
+            repository.deleteTask(id)
+            _taskStateData.postValue(StateTask.Delete)
+            _taksStateMessage.postValue(R.string.text_delete_success_task)
+        } catch (ex: Exception) {
+            _taksStateMessage.postValue(R.string.text_delete_error_form_task_fragment)
+        }
     }
 
-    fun deleteTask(task: Task) {
-
-    }
-
+    // MARK: - Private Function(s).
     private fun insertTask(task: Task) = viewModelScope.launch {
         try {
             val id = repository.insertTask(task.toTaskEntity())
@@ -48,8 +51,14 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
         }
     }
 
-    private fun updateTask(task: Task) {
-
+    private fun updateTask(task: Task) = viewModelScope.launch {
+        try {
+            repository.updateTask(task.toTaskEntity())
+            _taskStateData.postValue(StateTask.Update)
+            _taksStateMessage.postValue(R.string.text_update_success_form_task_fragment)
+        } catch (ex: Exception) {
+            _taksStateMessage.postValue(R.string.text_update_error_form_task_fragment)
+        }
     }
 }
 
@@ -57,5 +66,5 @@ sealed class StateTask {
     object Inserted: StateTask()
     object Update: StateTask()
     object Delete: StateTask()
-    object List: StateTask()
+
 }

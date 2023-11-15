@@ -18,21 +18,21 @@
     </fragment>
     <fragment
         android:id="@+id/formTaskFragment"
-        android:name="com.devmeist3r.taskapp.ui.home.FormTaskFragment"
+        android:name="com.devmeist3r.taskapp.ui.FormTaskFragment"
         android:label="fragment_form_task"
         tools:layout="@layout/fragment_form_task">
         <argument
             android:name="task"
-            app:argType="com.devmeist3r.taskapp.ui.data.model.Task"
+            app:argType="com.devmeist3r.taskapp.data.model.Task"
             app:nullable="true" />
     </fragment>
     <argument
         android:name="task"
-        app:argType="com.devmeist3r.taskapp.ui.data.model.Task"
+        app:argType="com.devmeist3r.taskapp.data.model.Task"
         app:nullable="true" />
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.devmeist3r.taskapp.ui.home.TasksFragment"
+        android:name="com.devmeist3r.taskapp.ui.TasksFragment"
         android:label="fragment_tasks"
         tools:layout="@layout/fragment_tasks">
         <action

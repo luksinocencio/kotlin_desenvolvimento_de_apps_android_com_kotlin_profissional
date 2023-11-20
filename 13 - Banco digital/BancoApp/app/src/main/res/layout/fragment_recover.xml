@@ -49,19 +49,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_email_hint"
-            style="?attr/textInputFilledStyle"
+            style="@style/Theme.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
             android:hint="E-mail"
-            android:textColorHint="@color/color_default"
-            app:boxBackgroundColor="@color/white"
-            app:hintTextColor="@color/color_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview"
-            app:startIconDrawable="@drawable/ic_mail"
-            app:startIconTint="@color/color_default">
+            app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_email"
@@ -89,6 +85,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:indeterminate="true"
+            android:visibility="invisible"
             app:indicatorColor="@color/color_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -10,20 +10,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:padding="24dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_email_hint"
-            style="?attr/textInputFilledStyle"
+            style="@style/Theme.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
-            android:textColorHint="@color/color_default"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/color_default"
-            app:cursorColor="@color/color_default"
-            app:hintTextColor="@color/color_default"
             app:layout_constraintBottom_toTopOf="@+id/edit_password_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:startIconDrawable="@drawable/ic_mail"
-            app:startIconTint="@color/color_default">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_email"
@@ -42,29 +37,23 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_password_hint"
-            style="?attr/textInputFilledStyle"
+            style="@style/Theme.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Senha"
-            android:textColorHint="@color/color_default"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/color_default"
-            app:cursorColor="@color/color_default"
-            app:hintTextColor="@color/color_default"
             app:layout_constraintBottom_toTopOf="@+id/btn_signin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_email_hint"
-            app:startIconDrawable="@drawable/ic_lock"
-            app:startIconTint="@color/color_default">
+            app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_password"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

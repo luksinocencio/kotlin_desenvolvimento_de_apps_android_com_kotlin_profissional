@@ -1,5 +1,6 @@
 package br.com.devmeist3r.bancoapp.presenter.auth.register
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.domain.auth.RegisterUsecase
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerUsecase: RegisterUsecase
-) {
+) : ViewModel() {
     fun register(user: User) = liveData(Dispatchers.IO) {
         try {
             emit(StateView.Loading())

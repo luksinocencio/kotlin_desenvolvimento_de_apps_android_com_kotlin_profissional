@@ -1,5 +1,6 @@
 package br.com.devmeist3r.bancoapp.presenter.auth.recover
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.domain.auth.LoginUsecase
@@ -13,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecoverViewModel @Inject constructor(
     private val recoverUsecase: RecoverUsecase
-) {
+) : ViewModel() {
     fun recover(email: String) = liveData(Dispatchers.IO) {
         try {
             emit(StateView.Loading())

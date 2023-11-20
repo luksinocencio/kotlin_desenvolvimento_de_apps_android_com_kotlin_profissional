@@ -48,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/barlayout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edit_email"
+            android:id="@+id/edit_email_hint"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,6 +64,7 @@
             app:startIconTint="@color/color_default">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -79,7 +80,7 @@
             android:text="Enviar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_email_hint" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/circularProgressIndicator"

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
 
     private var _binding: FragmentSplashBinding? = null

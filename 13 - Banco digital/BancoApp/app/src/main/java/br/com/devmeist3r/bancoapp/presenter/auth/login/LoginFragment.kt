@@ -5,16 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import br.com.devmeist3r.bancoapp.R
+import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.databinding.FragmentLoginBinding
+import br.com.devmeist3r.bancoapp.util.StateView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,12 +52,33 @@ class LoginFragment : Fragment() {
 
         if (email.isNotEmpty()) {
             if (password.isNotEmpty()) {
-                Toast.makeText(requireContext(), "Login...", Toast.LENGTH_SHORT).show()
+                loginUser(email, password)
             } else {
                 Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        Toast.makeText(requireContext(), "Conta criada com sucesso", Toast.LENGTH_SHORT).show()
+        loginViewModel.login(email, password).observe(viewLifecycleOwner) { stateView ->
+            when (stateView) {
+                is StateView.Loading -> {
+                    binding.circularProgressIndicator.isVisible = true
+                }
+
+                is StateView.Sucess -> {
+                    binding.circularProgressIndicator.isVisible = false
+                    findNavController().navigate(R.id.action_global_homeFragment)
+                }
+
+                is StateView.Error -> {
+                    binding.circularProgressIndicator.isVisible = false
+                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

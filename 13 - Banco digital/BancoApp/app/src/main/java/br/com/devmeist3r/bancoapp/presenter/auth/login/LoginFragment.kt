@@ -13,6 +13,7 @@ import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.databinding.FragmentLoginBinding
 import br.com.devmeist3r.bancoapp.util.StateView
+import br.com.devmeist3r.bancoapp.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,15 +55,14 @@ class LoginFragment : Fragment() {
             if (password.isNotEmpty()) {
                 loginUser(email, password)
             } else {
-                Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT).show()
+                showBottomSheet(message = "Digite sua senha")
             }
         } else {
-            Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = "Digite seu e-mail")
         }
     }
 
     private fun loginUser(email: String, password: String) {
-        Toast.makeText(requireContext(), "Conta criada com sucesso", Toast.LENGTH_SHORT).show()
         loginViewModel.login(email, password).observe(viewLifecycleOwner) { stateView ->
             when (stateView) {
                 is StateView.Loading -> {
@@ -76,7 +76,7 @@ class LoginFragment : Fragment() {
 
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    stateView.message?.let { showBottomSheet(message = it) }
                 }
             }
         }

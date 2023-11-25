@@ -13,6 +13,7 @@ import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.databinding.FragmentRecoverBinding
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.initToolbar
+import br.com.devmeist3r.bancoapp.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,10 +45,9 @@ class RecoverFragment : Fragment() {
         val email = binding.editEmail.text.toString().trim()
 
         if (email.isNotEmpty()) {
-            Toast.makeText(requireContext(), "E-mail enviado!", Toast.LENGTH_SHORT).show()
             recoverUser(email)
         } else {
-            Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = getString(R.string.text_email_empty))
         }
     }
 
@@ -60,7 +60,9 @@ class RecoverFragment : Fragment() {
 
                 is StateView.Sucess -> {
                     binding.circularProgressIndicator.isVisible = false
-                    Toast.makeText(requireContext(), "E-mail enviado com sucesso", Toast.LENGTH_SHORT).show()
+                    showBottomSheet(
+                        message = getString(R.string.text_message_send_success_recover_fragment)
+                    )
                 }
 
                 is StateView.Error -> {

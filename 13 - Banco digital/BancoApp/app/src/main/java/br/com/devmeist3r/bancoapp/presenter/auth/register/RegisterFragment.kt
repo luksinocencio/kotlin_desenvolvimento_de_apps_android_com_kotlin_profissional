@@ -8,10 +8,13 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.databinding.FragmentRegisterBinding
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.initToolbar
+import br.com.devmeist3r.bancoapp.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,18 +56,16 @@ class RegisterFragment : Fragment() {
                         val user = User(name, email, phone, password)
                         registerUser(user)
                     } else {
-                        Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT)
-                            .show()
+                        showBottomSheet(message = getString(R.string.text_password_empty))
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Digite seu telefone", Toast.LENGTH_SHORT)
-                        .show()
+                    showBottomSheet(message = getString(R.string.text_phone_empty))
                 }
             } else {
-                Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+                showBottomSheet(message = getString(R.string.text_email_empty))
             }
         } else {
-            Toast.makeText(requireContext(), "Digite seu nome", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = getString(R.string.text_name_empty))
         }
     }
 
@@ -82,6 +83,7 @@ class RegisterFragment : Fragment() {
                 }
                 is StateView.Sucess -> {
                     binding.circularProgressIndicator.isVisible = false
+                    findNavController().navigate(R.id.action_global_homeFragment)
                 }
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false

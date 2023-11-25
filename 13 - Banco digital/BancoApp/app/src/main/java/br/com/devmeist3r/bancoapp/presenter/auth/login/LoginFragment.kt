@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import br.com.devmeist3r.bancoapp.R
-import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.databinding.FragmentLoginBinding
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.showBottomSheet
@@ -55,10 +53,10 @@ class LoginFragment : Fragment() {
             if (password.isNotEmpty()) {
                 loginUser(email, password)
             } else {
-                showBottomSheet(message = "Digite sua senha")
+                showBottomSheet(message = getString(R.string.text_password_empty))
             }
         } else {
-            showBottomSheet(message = "Digite seu e-mail")
+            showBottomSheet(message = getString(R.string.text_email_empty))
         }
     }
 

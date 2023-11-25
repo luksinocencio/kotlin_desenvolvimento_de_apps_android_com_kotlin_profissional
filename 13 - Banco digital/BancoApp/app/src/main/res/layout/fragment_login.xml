@@ -18,15 +18,15 @@
             style="@style/Theme.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
+            android:hint="@string/text_hint_email_login_fragment"
             app:layout_constraintBottom_toTopOf="@+id/edit_password_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:startIconDrawable="@drawable/ic_mail"
-            >
+            app:placeholderText="@string/text_placeholder_email_login_fragment"
+            app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_email"
@@ -41,12 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Senha"
+            android:hint="@string/text_hint_password_login_fragment"
             app:layout_constraintBottom_toTopOf="@+id/btn_signin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_email_hint"
+            app:placeholderText="@string/text_placeholder_password_login_fragment"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/color_default"
-            android:text="Entrar"
+            android:text="@string/text_btn_login_fragment"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -83,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Criar conta"
+                android:text="@string/text_btn_register_login_fragment"
                 android:textColor="@color/color_default" />
 
             <TextView
@@ -91,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recuperar senha"
+                android:text="@string/text_btn_create_account_login_fragment"
                 android:textAlignment="textEnd"
                 android:textColor="@color/color_default" />
         </LinearLayout>

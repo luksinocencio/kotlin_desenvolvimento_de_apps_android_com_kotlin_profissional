@@ -22,6 +22,7 @@
         <item name="android:textColorHint">@color/color_default</item>
         <item name="colorOnSurface">@color/color_default</item>
         <item name="colorPrimary">@color/color_default</item>
+        <item name="placeholderTextColor">@color/color_default_transparent</item>
     </style>
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">

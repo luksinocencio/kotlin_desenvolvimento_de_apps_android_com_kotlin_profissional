@@ -14,11 +14,42 @@
     <!-- RecoverFragment-->
     <string name="text_message_send_success_recover_fragment">E-mail enviado com sucesso</string>
 
-    <!--    Erros Firebase Authentication-->
+    <!-- Erros Firebase Authentication-->
     <string name="account_not_registered_register_fragment">Nenhuma conta encontrada com este e-mail.</string>
     <string name="invalid_email_register_fragment">Insira um e-mail válido.</string>
     <string name="invalid_password_register_fragment">Senha inválida, tente novamente.</string>
     <string name="email_in_use_register_fragment">Este e-mail já está em uso.</string>
     <string name="strong_password_register_fragment">Insira uma senha mais forte.</string>
     <string name="error_generic">Ocorreu um erro, por tente mais tarde</string>
+
+    <!-- Login Fragment -->
+    <string name="text_hint_email_login_fragment">E-mail</string>
+    <string name="text_placeholder_email_login_fragment">Digite seu e-mail</string>
+    <string name="text_hint_password_login_fragment">Senha</string>
+    <string name="text_placeholder_password_login_fragment">Digite senha</string>
+    <string name="text_btn_login_fragment">Entrar</string>
+    <string name="text_btn_register_login_fragment">Criar conta</string>
+    <string name="text_btn_create_account_login_fragment">Recuperar senha</string>
+
+    <!-- Recover Fragment -->
+    <string name="text_tooltip_recover_fragment">Recuperar conta</string>
+    <string name="text_message_recover_fragment">Digite seu e-mail que te enviaremos um link para você alterar sua senha.</string>
+    <string name="text_hint_email_recover_fragment">E-mail</string>
+    <string name="text_placeholder_email_recover_fragment">Digite seu e-mail</string>
+    <string name="text_btn_send_recover_fragment">Enviar</string>
+
+    <!-- Register Fragment -->
+    <string name="text_tooltip_register_fragment">Criar conta</string>
+    <string name="text_hint_name_register_fragment">Nome</string>
+    <string name="text_placeholder_name_register_fragment">Digite seu nome</string>
+    <string name="text_hint_email_register_fragment">E-mail</string>
+    <string name="text_placeholder_email_register_fragment">Digite seu e-mail</string>
+    <string name="text_hint_phone_register_fragment">Telefone</string>
+    <string name="text_placeholder_phone_register_fragment">Digite seu telefone</string>
+    <string name="text_hint_password_register_fragment">Senha</string>
+    <string name="text_placeholder_password_register_fragment">**********</string>
+    <string name="text_hint_password_confirm_register_fragment">Confirme sua senha</string>
+    <string name="text_placeholder_password_confirm_register_fragment">**********</string>
+    <string name="text_btn_register_fragment">Cadastrar</string>
+
 </resources>

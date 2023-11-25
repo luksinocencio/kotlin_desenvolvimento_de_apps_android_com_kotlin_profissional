@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/barlayout"
@@ -23,7 +23,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Criar conta" />
+                    android:textColor="@color/color_default"
+                    android:text="@string/text_tooltip_register_fragment" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -43,10 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Nome"
-
+            android:hint="@string/text_hint_name_register_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barlayout"
+            app:placeholderText="@string/text_placeholder_name_register_fragment"
             app:startIconDrawable="@drawable/ic_person">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,8 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="E-mail"
+            android:hint="@string/text_hint_email_register_fragment"
             app:layout_constraintTop_toBottomOf="@+id/edit_name_hint"
+            app:placeholderText="@string/text_placeholder_email_register_fragment"
             app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -82,8 +83,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Telefone"
+            android:hint="@string/text_hint_phone_register_fragment"
             app:layout_constraintTop_toBottomOf="@+id/edit_email_hint"
+            app:placeholderText="@string/text_placeholder_phone_register_fragment"
             app:startIconDrawable="@drawable/ic_phone">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -101,8 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Senha"
+            android:hint="@string/text_hint_password_register_fragment"
             app:layout_constraintTop_toBottomOf="@+id/edit_phone_hint"
+            app:placeholderText="@string/text_placeholder_password_register_fragment"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Confirmar senha"
+            android:hint="@string/text_hint_password_register_fragment"
+            app:placeholderText="@string/text_placeholder_password_register_fragment"
             app:layout_constraintTop_toBottomOf="@+id/edit_password_hint"
             app:startIconDrawable="@drawable/ic_lock">
 
@@ -139,7 +143,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/color_default"
-            android:text="Cadastrar"
+            android:text="@string/text_btn_register_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_password_confirm_hint" />

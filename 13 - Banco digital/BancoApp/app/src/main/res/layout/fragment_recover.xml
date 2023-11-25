@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/barlayout"
@@ -32,7 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Recuperar conta" />
+                    android:text="@string/text_tooltip_recover_fragment"
+                    android:textColor="@color/color_default" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -41,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
-            android:text="Digite seu e-mail que te enviaremos um link para você alterar sua senha."
+            android:text="@string/text_message_recover_fragment"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +55,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
-            android:hint="E-mail"
+            android:hint="@string/text_hint_email_recover_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview"
+            app:placeholderText="@string/text_placeholder_email_recover_fragment"
             app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +75,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/color_default"
-            android:text="Enviar"
+            android:text="@string/text_btn_send_recover_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_email_hint" />

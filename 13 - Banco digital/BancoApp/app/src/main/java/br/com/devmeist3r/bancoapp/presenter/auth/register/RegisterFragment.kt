@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,18 +45,22 @@ class RegisterFragment : Fragment() {
     private fun validateData() {
         val name = binding.editName.text.toString().trim()
         val email = binding.editEmail.text.toString().trim()
-        val phone = binding.editPhone.text.toString().trim()
+        val phone = binding.editPhone.unMaskedText
         val password = binding.editPassword.text.toString().trim()
 
         if (name.isNotEmpty()) {
             if (email.isNotEmpty()) {
-                if (phone.isNotEmpty()) {
-                    if (password.isNotEmpty()) {
-                        binding.circularProgressIndicator.isVisible = true
-                        val user = User(name, email, phone, password)
-                        registerUser(user)
+                if (phone?.isNotEmpty() == true) {
+                    if (phone.length == 11) {
+                        if (password.isNotEmpty()) {
+                            binding.circularProgressIndicator.isVisible = true
+                            val user = User(name, email, phone, password)
+                            registerUser(user)
+                        } else {
+                            showBottomSheet(message = getString(R.string.text_password_empty))
+                        }
                     } else {
-                        showBottomSheet(message = getString(R.string.text_password_empty))
+                        showBottomSheet(message = getString(R.string.text_phone_invalid))
                     }
                 } else {
                     showBottomSheet(message = getString(R.string.text_phone_empty))
@@ -81,13 +84,21 @@ class RegisterFragment : Fragment() {
                 is StateView.Loading -> {
                     binding.circularProgressIndicator.isVisible = true
                 }
+
                 is StateView.Sucess -> {
                     binding.circularProgressIndicator.isVisible = false
                     findNavController().navigate(R.id.action_global_homeFragment)
                 }
+
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false
-                    showBottomSheet(message = getString(FirebaseHelper.validError(stateView.message ?: "")))
+                    showBottomSheet(
+                        message = getString(
+                            FirebaseHelper.validError(
+                                stateView.message ?: ""
+                            )
+                        )
+                    )
                 }
             }
         }

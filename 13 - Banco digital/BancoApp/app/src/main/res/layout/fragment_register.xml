@@ -31,8 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textColor="@color/color_default"
-                    android:text="@string/text_tooltip_register_fragment" />
+                    android:text="@string/text_tooltip_register_fragment"
+                    android:textColor="@color/color_default" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -88,11 +88,12 @@
             app:placeholderText="@string/text_placeholder_phone_register_fragment"
             app:startIconDrawable="@drawable/ic_phone">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.vicmikhailau.maskededittext.MaskedEditText
                 android:id="@+id/edit_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone" />
+                android:inputType="phone"
+                app:mask="(##) #####-####" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,8 +125,8 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
             android:hint="@string/text_hint_password_register_fragment"
-            app:placeholderText="@string/text_placeholder_password_register_fragment"
             app:layout_constraintTop_toBottomOf="@+id/edit_password_hint"
+            app:placeholderText="@string/text_placeholder_password_register_fragment"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText

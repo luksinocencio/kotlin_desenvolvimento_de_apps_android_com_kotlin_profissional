@@ -9,7 +9,9 @@
     <string name="text_name_empty">Digite seu nome</string>
     <string name="text_email_empty">Digite seu e-mail</string>
     <string name="text_phone_empty">Digite seu telefone</string>
+    <string name="text_phone_invalid">Digite um telefone válido</string>
     <string name="text_password_empty">Digite sua senha</string>
+
 
     <!-- RecoverFragment-->
     <string name="text_message_send_success_recover_fragment">E-mail enviado com sucesso</string>

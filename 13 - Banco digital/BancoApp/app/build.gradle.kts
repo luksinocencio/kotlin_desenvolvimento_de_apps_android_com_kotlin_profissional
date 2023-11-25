@@ -66,5 +66,7 @@ dependencies {
     val lifecycleVersion = "2.6.2"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    implementation("io.github.vicmikhailau:MaskedEditText:5.0.1")
 }
 

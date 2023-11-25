@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.databinding.FragmentRecoverBinding
+import br.com.devmeist3r.bancoapp.util.FirebaseHelper
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.initToolbar
 import br.com.devmeist3r.bancoapp.util.showBottomSheet
@@ -67,7 +68,7 @@ class RecoverFragment : Fragment() {
 
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    showBottomSheet(message = getString(FirebaseHelper.validError(stateView.message ?: "")))
                 }
             }
         }

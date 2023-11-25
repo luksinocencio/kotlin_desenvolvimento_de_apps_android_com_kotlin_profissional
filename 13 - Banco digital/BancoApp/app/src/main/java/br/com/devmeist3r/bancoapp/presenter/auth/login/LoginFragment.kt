@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.databinding.FragmentLoginBinding
+import br.com.devmeist3r.bancoapp.util.FirebaseHelper
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,6 +76,7 @@ class LoginFragment : Fragment() {
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false
                     stateView.message?.let { showBottomSheet(message = it) }
+                    showBottomSheet(message = getString(FirebaseHelper.validError(stateView.message ?: "")))
                 }
             }
         }

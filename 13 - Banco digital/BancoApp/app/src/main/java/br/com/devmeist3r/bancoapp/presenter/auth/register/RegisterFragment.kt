@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.devmeist3r.bancoapp.R
 import br.com.devmeist3r.bancoapp.data.model.User
 import br.com.devmeist3r.bancoapp.databinding.FragmentRegisterBinding
+import br.com.devmeist3r.bancoapp.util.FirebaseHelper
 import br.com.devmeist3r.bancoapp.util.StateView
 import br.com.devmeist3r.bancoapp.util.initToolbar
 import br.com.devmeist3r.bancoapp.util.showBottomSheet
@@ -75,7 +76,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun registerUser(user: User) {
-        Toast.makeText(requireContext(), "Conta criada com sucesso", Toast.LENGTH_SHORT).show()
         registerViewModel.register(user).observe(viewLifecycleOwner) { stateView ->
             when (stateView) {
                 is StateView.Loading -> {
@@ -87,7 +87,7 @@ class RegisterFragment : Fragment() {
                 }
                 is StateView.Error -> {
                     binding.circularProgressIndicator.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    showBottomSheet(message = getString(FirebaseHelper.validError(stateView.message ?: "")))
                 }
             }
         }
